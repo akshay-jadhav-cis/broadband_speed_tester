@@ -12,6 +12,9 @@ const network = require("./routes/network_routes");
 
 const app = express();
 
+// Trust Render Proxy
+app.set("trust proxy", true);
+
 // Middlewares
 app.use(helmet());
 

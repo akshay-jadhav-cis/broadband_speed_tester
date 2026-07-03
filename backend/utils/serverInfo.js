@@ -1,11 +1,9 @@
-const serverInfo = {
+module.exports = {
 
-    name: "Local Development Server",
+    name: "Render Server",
 
-    city: "Pune",
+    city: "Ohio",
 
-    country: "India"
+    country: "USA"
 
 };
-
-module.exports = serverInfo;
