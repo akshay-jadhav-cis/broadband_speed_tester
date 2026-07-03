@@ -1,0 +1,17 @@
+.gauge{
+
+    width:320px;
+
+    margin:auto;
+
+}
+
+@media(max-width:768px){
+
+.gauge{
+
+width:260px;
+
+}
+
+}
