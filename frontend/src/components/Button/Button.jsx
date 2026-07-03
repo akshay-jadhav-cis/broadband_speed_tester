@@ -1,63 +1,59 @@
+import { useState } from "react";
 import useSpeedTest from "../../hooks/useSpeedTest";
+import useDownloadTest from "../../hooks/useDownload";
+import useUploadTest from "../../hooks/useUpload";
+import usePingTest from "../../hooks/usePingTest";
+import useJitterTest from "../../hooks/useJitterTest";
 
 function Button() {
+    const { setDownload, setUpload } = useSpeedTest();
 
-    const { setDownload } = useSpeedTest();
+    const startDownloadTest = useDownloadTest();
+    const startUploadTest = useUploadTest();
+    const startPingTest = usePingTest();
+    const calculateJitter = useJitterTest();
+
+    const [isTesting, setIsTesting] = useState(false);
 
     const startTest = async () => {
+        if (isTesting) return;
 
-        // Create AbortController
-        const controller = new AbortController();
-
-        // Stop the request after 10 seconds
-        setTimeout(() => {
-            controller.abort();
-        }, 10000);
+        setIsTesting(true);
 
         try {
+            // Reset values
+            setDownload(0);
+            setUpload(0);
 
-            const response = await fetch("http://localhost:8000/download", {
-                signal: controller.signal
-            });
+            console.log("Starting Download Test...");
+            await startDownloadTest();
+            console.log("Download Completed");
 
-            const reader = response.body.getReader();
+            console.log("Starting Upload Test...");
+            await startUploadTest();
+            console.log("Upload Completed");
 
-            let bytes = 0;
-            const start = performance.now();
+            console.log("Calculating Ping...");
+            const samples = await startPingTest();
 
-            while (true) {
+            console.log("Calculating Jitter...");
+            calculateJitter(samples);
 
-                const { done, value } = await reader.read();
-
-                if (done) break;
-
-                bytes += value.length;
-
-                const seconds = (performance.now() - start) / 1000;
-
-                const mbps = (bytes * 8) / (seconds * 1000000);
-
-                setDownload(mbps);
-            }
-
-        } catch (error) {
-
-            if (error.name === "AbortError") {
-                console.log("Speed test completed.");
-            } else {
-                console.error(error);
-            }
-
+            console.log("Speed Test Finished");
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsTesting(false);
         }
-
     };
 
     return (
         <button
             className="start-btn"
             onClick={startTest}
+            disabled={isTesting}
         >
-            Start Test
+            {isTesting ? "Testing..." : "🚀 Start Test"}
         </button>
     );
 }

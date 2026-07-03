@@ -1,48 +1,76 @@
-import { FaGlobe, FaServer } from "react-icons/fa";
-import { MdWifi } from "react-icons/md";
 import "./Footer.css";
 
+import useNetworkInfo from "../../hooks/useNetworkInfo";
+
 function Footer() {
-  return (
-    <footer className="footer">
 
-      <div className="footer-info">
+    const {
+        ip,
+        isp,
+        city,
+        region,
+        country,
+        server,
+        serverCity,
+        serverCountry
+    } = useNetworkInfo();
 
-        <div className="footer-card">
-          <FaGlobe className="footer-icon blue" />
+    return (
 
-          <div>
-            <p>Your IP Address</p>
-            <h4>--</h4>
-          </div>
-        </div>
+        <footer className="footer">
 
-        <div className="footer-card">
-          <MdWifi className="footer-icon purple" />
+            <div className="footer-grid">
 
-          <div>
-            <p>ISP</p>
-            <h4>--</h4>
-          </div>
-        </div>
+                <div className="footer-item">
 
-        <div className="footer-card">
-          <FaServer className="footer-icon green" />
+                    <span>IP Address</span>
 
-          <div>
-            <p>Server</p>
-            <h4>--</h4>
-          </div>
-        </div>
+                    <h3>{ip}</h3>
 
-      </div>
+                </div>
 
-      <div className="copyright">
-        © 2026 Broadband Speed Tester. All Rights Reserved.
-      </div>
+                <div className="footer-item">
 
-    </footer>
-  );
+                    <span>ISP</span>
+
+                    <h3>{isp}</h3>
+
+                </div>
+
+                <div className="footer-item">
+
+                    <span>Location</span>
+
+                    <h3>
+                        {city}, {region}, {country}
+                    </h3>
+
+                </div>
+
+                <div className="footer-item">
+
+                    <span>Server</span>
+
+                    <h3>
+                        {server}
+                        <br />
+                        {serverCity}, {serverCountry}
+                    </h3>
+
+                </div>
+
+            </div>
+
+            <div className="copyright">
+
+                © 2026 Broadband Speed Tester. All Rights Reserved.
+
+            </div>
+
+        </footer>
+
+    );
+
 }
 
 export default Footer;

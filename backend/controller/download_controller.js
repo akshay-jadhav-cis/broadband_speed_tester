@@ -1,26 +1,25 @@
 const DownloadStream = require("../services/streamGenerator");
 
 const startDownload = (req, res) => {
-
     res.setHeader("Content-Type", "application/octet-stream");
     res.setHeader("Cache-Control", "no-store");
-    res.setHeader("Connection", "keep-alive");
 
     const stream = new DownloadStream();
 
-    stream.pipe(res);
-
-    // Stop after 10 seconds
-    setTimeout(() => {
+    const timer = setTimeout(() => {
         stream.destroy();
-        res.end();
+
+        if (!res.writableEnded) {
+            res.end();
+        }
     }, 10000);
 
     req.on("close", () => {
+        clearTimeout(timer);
         stream.destroy();
     });
+
+    stream.pipe(res);
 };
 
-module.exports = {
-    startDownload
-};
+module.exports = { startDownload };

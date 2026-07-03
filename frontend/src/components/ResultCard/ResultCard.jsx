@@ -1,41 +1,23 @@
-import useSpeedTest from "../../hooks/useSpeedTest";
+function ResultCard({
+    title,
+    value,
+    unit
+}) {
 
-function ResultCard({ title, value, unit }) {
-  const {
+    return (
 
-    download,
-    upload,
-    ping,
-    jitter
+        <div className="card">
 
-  } = useSpeedTest();
-  return (
-    <div className="card">
-      <ResultCard
-        title="DOWNLOAD"
-        value={download.toFixed(2)}
-        unit="Mbps"
-      />
+            <h3>{title}</h3>
 
-      <ResultCard
-        title="UPLOAD"
-        value={upload.toFixed(2)}
-        unit="Mbps"
-      />
+            <h1>{value}</h1>
 
-      <ResultCard
-        title="PING"
-        value={ping}
-        unit="ms"
-      />
+            <p>{unit}</p>
 
-      <ResultCard
-        title="JITTER"
-        value={jitter}
-        unit="ms"
-      />
-    </div>
-  );
+        </div>
+
+    );
+
 }
 
 export default ResultCard;

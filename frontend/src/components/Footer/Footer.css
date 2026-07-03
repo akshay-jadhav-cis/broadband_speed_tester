@@ -2,127 +2,131 @@
 
     width:100%;
 
-    margin-top:50px;
+    margin-top:60px;
+
+    padding:30px 0;
+
+    border-top:1px solid #2c2c2c;
 
 }
 
-.footer-info{
-
-    width:min(1250px,92%);
-
-    margin:auto;
-
-    background:#121d32;
-
-    border-radius:18px;
+.footer-grid{
 
     display:grid;
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(4,1fr);
 
     gap:20px;
 
-    padding:25px;
-
-    box-shadow:0 0 15px rgba(0,0,0,.3);
-
 }
 
-.footer-card{
+.footer-item{
 
-    display:flex;
+    background:#181818;
 
-    align-items:center;
+    border:1px solid #2b2b2b;
 
-    gap:18px;
+    border-radius:18px;
 
-    padding:15px;
-
-    border-radius:12px;
+    padding:22px;
 
     transition:.3s;
 
 }
 
-.footer-card:hover{
+.footer-item:hover{
 
-    background:#182746;
+    transform:translateY(-5px);
 
-}
+    border-color:#00d4ff;
 
-.footer-icon{
-
-    font-size:34px;
-
-    padding:10px;
-
-    border-radius:50%;
-
-    color:white;
+    box-shadow:0 10px 30px rgba(0,212,255,.15);
 
 }
 
-.blue{
+.footer-item span{
 
-    background:#00c8ff;
-
-}
-
-.purple{
-
-    background:#8b5cf6;
-
-}
-
-.green{
-
-    background:#22c55e;
-
-}
-
-.footer-card p{
+    display:block;
 
     color:#9ca3af;
 
-    font-size:15px;
+    font-size:14px;
 
-    margin-bottom:5px;
+    margin-bottom:10px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
 
 }
 
-.footer-card h4{
+.footer-item h3{
 
     color:white;
 
-    font-size:20px;
+    font-size:18px;
+
+    line-height:1.5;
+
+    font-weight:600;
+
+    word-break:break-word;
 
 }
 
 .copyright{
 
-    margin-top:20px;
+    margin-top:35px;
 
     text-align:center;
 
-    color:#9ca3af;
+    color:#8f8f8f;
 
-    padding-bottom:20px;
+    font-size:14px;
 
-    font-size:15px;
+    border-top:1px solid #2b2b2b;
+
+    padding-top:20px;
 
 }
 
-@media(max-width:900px){
+/* Tablet */
 
-.footer-info{
+@media(max-width:992px){
+
+.footer-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+
+.footer-grid{
 
 grid-template-columns:1fr;
 
 }
 
-.footer-card{
+.footer-item{
 
-justify-content:flex-start;
+padding:18px;
+
+}
+
+.footer-item h3{
+
+font-size:16px;
+
+}
+
+.copyright{
+
+font-size:13px;
 
 }
 

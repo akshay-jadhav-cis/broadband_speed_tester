@@ -9,6 +9,9 @@ export default function SpeedProvider({ children }) {
     const [ping, setPing] = useState(0);
     const [jitter, setJitter] = useState(0);
 
+    // Live Graph Data
+    const [graphData, setGraphData] = useState([]);
+
     return (
         <SpeedContext.Provider
             value={{
@@ -16,13 +19,17 @@ export default function SpeedProvider({ children }) {
                 upload,
                 ping,
                 jitter,
+                graphData,
+
                 setDownload,
                 setUpload,
                 setPing,
-                setJitter
+                setJitter,
+                setGraphData
             }}
         >
             {children}
         </SpeedContext.Provider>
     );
+
 }
