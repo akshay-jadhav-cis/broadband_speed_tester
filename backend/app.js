@@ -20,6 +20,7 @@ app.use(compression());
 app.use(cors({
     origin: [
         "http://localhost:5000",
+        "https://broadband-speed-tester.vercel.app",
         process.env.FRONTEND_URL
     ].filter(Boolean),
     credentials: true
